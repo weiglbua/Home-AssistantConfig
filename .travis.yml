@@ -3,6 +3,12 @@ python:
   - "3.5"
 before_install:
   - mv travis_secrets.yaml secrets.yaml
+  - mkdir -p /etc/letsencrypt/live/
+  - touch /etc/letsencrypt/live/test.pam
+  - touch /etc/letsencrypt/live/test.key
+
+
+
 install:
   - pip3 install homeassistant
 script:
