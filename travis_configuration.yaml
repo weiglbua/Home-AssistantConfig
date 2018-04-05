@@ -1,0 +1,168 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 182.88
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Vienna
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+  base_url: !secret base_url
+  login_attempts_threshold: 5
+
+duckdns:
+  domain: !secret domain
+  access_token: !secret access_token
+
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+sensor:
+ - platform: yr
+   name: Weather
+   monitored_conditions:
+     - temperature
+     - symbol
+     - precipitation
+     - windSpeed
+     - pressure
+     - windDirection
+     - humidity
+     - fog
+     - cloudiness
+     - lowClouds
+     - mediumClouds
+     - highClouds
+     - dewpointTemperature
+ - platform: cert_expiry
+   host: ikke.duckdns.org
+
+
+# Tracking entity to entity
+ - platform: google_travel_time
+   name: Nach Hause
+   api_key: !secret google_api
+   origin: device_tracker.mathias_opo
+   destination: zone.home
+
+# Tracking entity to zone friendly name
+ - platform: google_travel_time
+   name: In die Arbeit
+   api_key: !secret google_api
+   origin: device_tracker.mathias_opo
+   destination: zone.arbeitmathias
+
+device_tracker:
+  - platform: owntracks_http
+  - platform: nmap_tracker
+    hosts: 192.168.178.0/24
+
+zone:
+  - name: ArbeitBianca
+    latitude: 48.223122
+    longitude: 16.389205
+    radius: 40
+    icon: mdi:briefcase
+
+  - name: ArbeitMathias
+    latitude: 48.163811
+    longitude: 16.333961
+    radius: 80
+    icon: mdi:console-network
+
+  - name: Genner
+    latitude: 48.344207
+    longitude: 16.331971
+    radius: 10
+    icon: mdi:tshirt-crew
+
+  - name: Chilli
+    latitude: 48.344470
+    longitude: 16.331785
+    radius: 10
+    icon: mdi:tshirt-crew
+
+  - name: Haas
+    latitude: 48.368977
+    longitude: 16.297926
+    radius: 165
+    icon: mdi:food-croissant
+
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 20
+    icon: mdi:account-multiple
+
+
+feedreader:
+  urls:
+    - https://www.home-assistant.io/atom.xml
+    - https://github.com/blog.atom
+    - https://hasspodcast.io/feed/podcast
+    - http://derStandard.at/?page=rss&ressort=Wissenschaft
+    - http://derStandard.at/?page=rss&ressort=Web
+    - http://derstandard.at/?page=rss&ressort=Inland
+    - http://derstandard.at/?page=rss&ressort=International
+    - http://derStandard.at/?page=rss&ressort=Seite1
+
+media_player:
+  - platform: spotify
+    client_id: !secret client_id
+    client_secret: !secret client_secret
+
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

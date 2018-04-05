@@ -3,9 +3,7 @@ python:
   - "3.5"
 before_install:
   - mv travis_secrets.yaml secrets.yaml
-  - sed -i '/ ssl_certificate: !secret ssl_cert/d' ./configuration.yaml
-  - sed -i '/ ssl_key: !secret ssl_key' ./configuration.yaml
-
+  - mv travis_configuratio.yaml configuration.yaml
 
 
 install:
