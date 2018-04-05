@@ -1,0 +1,49 @@
+
+
+#################################################################
+## Customize
+#################################################################
+
+        ##########################################################
+        ## Thermostat
+        ##########################################################
+
+  sensor.weather_cloudiness:
+    friendly_name: Bewoelkungsgrad
+
+  sensor.weather_dewpoint_temperature:
+    friendly_name: Taupunkt
+
+  sensor.weather_fog:
+    friendly_name: Nebelgrad
+
+  sensor.weather_high_clouds:
+    friendly_name: Hochwolken
+
+  sensor.weather_humidity:
+    friendly_name: Luftfeuchtikeit
+
+  sensor.weather_low_clouds:
+    friendly_name: Tiefwolken
+
+  sensor.weather_medium_clouds:
+    friendly_name: Mittelwolken
+
+  sensor.weather_precipitation:
+    friendly_name: Niederschlag
+
+  sensor.weather_pressure:
+    friendly_name: Luftdruck
+
+  sensor.weather_temperature:
+    friendly_name: Temperatur
+
+  sensor.weather_wind_direction:
+    friendly_name: Windrichtung
+
+  sensor.weather_wind_speed:
+    friendly_name: Windgeschwindigkeit
+
+  sensor.weather_symbol:
+    friendly_name: Wetterstatus
+

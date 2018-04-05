@@ -1,0 +1,4 @@
+media_player.wohnzimmer:
+  name: Mathias Cromecast
+  platform: cast
+  unique_id: f0b7661c-250f-0fe6-8d2d-f5d28fe98d82
