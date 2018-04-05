@@ -5,3 +5,4 @@
 !*travis*
 secrets.yaml
 known_devices.yaml
+gitupdate.sh
