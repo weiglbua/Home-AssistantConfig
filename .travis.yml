@@ -3,7 +3,7 @@ python:
   - "3.5"
 before_install:
   - mv travis_secrets.yaml secrets.yaml
-  - mv travis_configuratio.yaml configuration.yaml
+  - mv travis_configuration.yaml configuration.yaml
 
 
 install:
