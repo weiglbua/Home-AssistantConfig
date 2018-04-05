@@ -3,9 +3,8 @@ python:
   - "3.5"
 before_install:
   - mv travis_secrets.yaml secrets.yaml
-  - mkdir -p /etc/letsencrypt/live/
-  - touch /etc/letsencrypt/live/test.pam
-  - touch /etc/letsencrypt/live/test.key
+  - sed -i '/ ssl_certificate: !secret ssl_cert/d' ./configuration.yaml
+  - sed -i '/ ssl_key: !secret ssl_key' ./configuration.yaml
 
 
 
