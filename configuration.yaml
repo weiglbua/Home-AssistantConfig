@@ -180,6 +180,9 @@ notify:
     platform: telegram
     chat_id: !secret chatid_mathias
 
+google:
+  client_id: !secret calid
+  client_secret: !secret calsec
 
 group: !include groups.yaml
 automation: !include automations.yaml
