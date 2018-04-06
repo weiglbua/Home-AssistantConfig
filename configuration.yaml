@@ -21,6 +21,10 @@ frontend:
 # Enables configuration UI
 config:
 
+
+automation: !include automations.yaml
+
+
 http:
   # Secrets are defined in the file secrets.yaml
   api_password: !secret http_password
@@ -163,6 +167,18 @@ media_player:
   - platform: spotify
     client_id: !secret client_id
     client_secret: !secret client_secret
+
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_apikey
+    allowed_chat_ids:
+      - !secret chatid_mathias
+
+notify:
+  - name: Telegram
+    platform: telegram
+    chat_id: !secret chatid_mathias
 
 
 group: !include groups.yaml
