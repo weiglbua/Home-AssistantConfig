@@ -185,6 +185,37 @@ google:
   client_id: !secret calid
   client_secret: !secret calsec
 
+
+mqtt:
+  broker: 192.168.178.23
+  port: 1883
+  client_id: hass
+  username: !secret mqtt_usr
+  password: !secret mqtt_pwd
+
+switch:
+  - platform: mqtt
+    name: "Sonoff power"
+    state_topic: "stat/sonoff/POWER"
+    command_topic: "cmnd/sonoff/POWER"
+    availability_topic: "tele/sonoff/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: true
+
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+camera:
+  - platform: onvif
+    host: !secret cam_ip
+    username: !secret cam_user
+    password: !secret cam_pass
+    port: !secret cam_port
+    profile: 1
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml

@@ -15,7 +15,6 @@
       - Edit message:/edit_msg, Don't:/do_nothing
       - Remove this button:/remove button
 
-
 - action:
   - service: notify.telegram
   alias: Neue Automatisierung
