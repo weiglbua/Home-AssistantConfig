@@ -67,6 +67,15 @@ tts:
 
 # Cloud
 cloud:
+  alexa:
+    filter:
+      include_entities:
+        - switch.sonoff_power
+    entity_config:
+      switch.sonoff_power:
+        name: Lampe
+        description: Die Russenlampe
+
 
 sensor:
  - platform: yr
@@ -86,7 +95,7 @@ sensor:
      - highClouds
      - dewpointTemperature
  - platform: cert_expiry
-   host: ikke.duckdns.org
+   host: !secret base_url
 
 
 # Tracking entity to entity
@@ -106,7 +115,8 @@ sensor:
 device_tracker:
   - platform: owntracks_http
   - platform: nmap_tracker
-    hosts: 192.168.178.0/24
+    hosts: !secret ip_range
+    consider_home: 300
 
 zone:
   - name: ArbeitBianca
@@ -146,16 +156,41 @@ zone:
     icon: mdi:account-multiple
 
 
-feedreader:
-  urls:
-    - https://www.home-assistant.io/atom.xml
-    - https://github.com/blog.atom
-    - https://hasspodcast.io/feed/podcast
-    - http://derStandard.at/?page=rss&ressort=Wissenschaft
-    - http://derStandard.at/?page=rss&ressort=Web
-    - http://derstandard.at/?page=rss&ressort=Inland
-    - http://derstandard.at/?page=rss&ressort=International
-    - http://derStandard.at/?page=rss&ressort=Seite1
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_apikey
+    allowed_chat_ids:
+      - !secret chatid_mathias
+
+notify:
+  - name: Telegram
+    platform: telegram
+    chat_id: !secret chatid_mathias
+
+google:
+  client_id: !secret calid
+  client_secret: !secret calsec
+
+
+mqtt:
+  broker: !secret broker_addr
+  port: !secret broker_port
+  client_id: hass
+  username: !secret mqtt_usr
+  password: !secret mqtt_pwd
+
+switch:
+  - platform: mqtt
+    name: "Sonoff power"
+    state_topic: "stat/sonoff/POWER"
+    command_topic: "cmnd/sonoff/POWER"
+    availability_topic: "tele/sonoff/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: true
 
 media_player:
   - platform: spotify

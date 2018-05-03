@@ -19,7 +19,7 @@
   - service: notify.telegram
   alias: Neue Automatisierung
   condition: []
-  id: '1523005221157'
+  id: '1523005221157' 
   trigger:
   - at: '11:10'
     platform: time

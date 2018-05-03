@@ -73,6 +73,14 @@ tts:
 
 # Cloud
 cloud:
+  alexa:
+    filter:
+      include_entities:
+        - switch.sonoff_power
+    entity_config:
+      switch.sonoff_power:
+        name: Lampe
+        description: Die Russenlampe
 
 sensor:
  - platform: yr
@@ -92,7 +100,7 @@ sensor:
      - highClouds
      - dewpointTemperature
  - platform: cert_expiry
-   host: ikke.duckdns.org
+   host: !secret base_url
 
 
 # Tracking entity to entity
@@ -112,7 +120,7 @@ sensor:
 device_tracker:
   - platform: owntracks_http
   - platform: nmap_tracker
-    hosts: 192.168.178.0/24
+    hosts: !secret ip_range
     consider_home: 300
 
 zone:
@@ -153,17 +161,6 @@ zone:
     icon: mdi:account-multiple
 
 
-feedreader:
-  urls:
-    - https://www.home-assistant.io/atom.xml
-    - https://github.com/blog.atom
-    - https://hasspodcast.io/feed/podcast
-    - http://derStandard.at/?page=rss&ressort=Wissenschaft
-    - http://derStandard.at/?page=rss&ressort=Web
-    - http://derstandard.at/?page=rss&ressort=Inland
-    - http://derstandard.at/?page=rss&ressort=International
-    - http://derStandard.at/?page=rss&ressort=Seite1
-
 media_player:
   - platform: spotify
     client_id: !secret client_id
@@ -187,9 +184,9 @@ google:
 
 
 mqtt:
-  broker: 192.168.178.23
-  port: 1883
-  client_id: hass
+  broker: !secret broker_addr
+  port: !secret broker_port
+  client_id: !secret broker_id
   username: !secret mqtt_usr
   password: !secret mqtt_pwd
 
